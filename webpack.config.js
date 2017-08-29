@@ -1,49 +1,17 @@
-"use strict";
-
-var webpack = require('webpack');
-var path = require('path');
-
-var appName = 'app';
-var entryPoint = './src/main.js';
-var exportPath = path.resolve(__dirname, './build');
-
-var plugins = [];
-var env = process.env.WEBPACK_ENV;
-
-if (env === 'production') {
-    var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-
-    plugins.push(new UglifyJsPlugin({ minimize: true }));
-    plugins.push(new webpack.DefinePlugin({
-        'process.env': {
-            NODE_ENV: '"production"'
-        }
-    }));
-
-    appName = appName + '.min.js';
-} else {
-    appName = appName + '.js';
-}
+const path = require('path');
 
 module.exports = {
-    entry: entryPoint,
+    entry: './src/main.js',
     output: {
-        path: exportPath,
-        filename: appName
+        path: path.resolve(__dirname, './dist'),
+        filename: 'build.js'
     },
     module: {
         loaders: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
                 loader: 'babel-loader',
-                query: {
-                    presets: ['es2015']
-                }
-            },
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader'
+                exclude: /node_modules/
             }
         ]
     },
@@ -51,6 +19,5 @@ module.exports = {
         alias: {
             'vue$': 'vue/dist/vue.esm.js'
         }
-    },
-    plugins
+    }
 };
