@@ -1,22 +1,14 @@
 <template>
     <div id="app">
-        <div class="message">Current value is: {{ count }}</div> 
-        <a href="#" @click.prevent="increment">Increment</a>
+        <router-link to="/">Main</router-link>
+        <router-link to="/alt">Alt</router-link>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
     export default {
-        data() {
-            return {
-                count: 0
-            };
-        },
-        methods: {
-            increment() {
-                this.count++;
-            }
-        }
+        name: 'app'
     };
 </script>
 

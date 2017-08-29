@@ -4,6 +4,10 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
 const config = {
     entry: {
         app: './src/main.js'
@@ -63,9 +67,12 @@ const config = {
         new webpack.NoEmitOnErrorsPlugin()
     ],
     resolve: {
+        extensions: ['.js', '.vue', '.json'],
         alias: {
-            'vue$': 'vue/dist/vue.esm.js'
-        }
+            'vue$': 'vue/dist/vue.esm.js',
+            '@': resolve('src')
+        },
+        symlinks: false
     }
 };
 
