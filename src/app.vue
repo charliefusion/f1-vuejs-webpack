@@ -1,13 +1,21 @@
 <template>
-    <div class="message">{{ msg }}</div>
+    <div id="app">
+        <div class="message">Current value is: {{ count }}</div> 
+        <a href="#" @click.prevent="increment">Increment</a>
+    </div>
 </template>
 
 <script>
     export default {
         data() {
             return {
-                msg: 'Hello there'
+                count: 0
             };
+        },
+        methods: {
+            increment() {
+                this.count++;
+            }
         }
     };
 </script>
