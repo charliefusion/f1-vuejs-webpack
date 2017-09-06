@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Main from '../components/Main';
-import Alt from '../components/Alt';
+import Drivers from '../components/Drivers';
 
 Vue.use(Router);
 
@@ -13,9 +13,9 @@ export default new Router({
             component: Main
         },
         {
-            path: '/alt',
-            name: 'Alt',
-            component: Alt
+            path: '/drivers',
+            name: 'Drivers',
+            component: Drivers
         }
     ]
 });

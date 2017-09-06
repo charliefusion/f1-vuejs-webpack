@@ -1,18 +1,23 @@
 <template>
     <div class="main">
         <div class="message">Current value is: {{ count }}</div> 
-        <a href="#" @click.prevent="increment">Increment</a>
+        <a href="#" v-on:click.prevent="increment" class="btn btn-default">Increment</a>
+        <div v-if="seen">
+            <p>I have a thing!</p>
+        </div>
+        <div v-else>
+            <p>I don't have a thing..</p>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
         name: 'main',
-        data() {
-            return {
-                count: 0
-            };
-        },
+        data: () => ({
+            count: 0,
+            seen: true
+        }),
         methods: {
             increment() {
                 this.count++;
