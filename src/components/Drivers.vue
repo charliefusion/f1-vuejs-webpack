@@ -14,15 +14,17 @@
         <div v-if="loading">Loading...</div>
         <table class="table table-striped" v-else>
             <thead>
-                <th>Name</th>
+                <th v-on:click="sortDrivers('familyName')">Name</th>
                 <th>Code</th>
-                <th>Nationality</th>
+                <th v-on:click="sortDrivers('nationality')">Nationality</th>
+                <th v-on:click="sortDrivers('points')">Points</th>
             </thead>
             <tbody>
                 <tr v-for="driver in drivers">
-                    <td>{{driver.givenName + ' ' + driver.familyName}}</td>
-                    <td>{{driver.code}}</td>
-                    <td>{{driver.nationality}}</td>
+                    <td>{{driver.Driver.givenName + ' ' + driver.Driver.familyName}}</td>
+                    <td>{{driver.Driver.code}}</td>
+                    <td>{{driver.Driver.nationality}}</td>
+                    <td>{{driver.points}}</td>
                 </tr>
             </tbody>
         </table>
@@ -41,12 +43,23 @@
         methods: {
             getData() {
                 this.loading = true;
-                this.$http.get('http://ergast.com/api/f1/' + this.year + '/drivers.json').then(response => {
+                this.$http.get('http://ergast.com/api/f1/' + this.year + '/driverStandings.json').then(response => {
                     console.log(response);
-                    this.drivers = response.body.MRData.DriverTable.Drivers;
+                    this.drivers = response.body.MRData.StandingsTable.StandingsLists[0].DriverStandings;
                     this.loading = false;
                 }, response => {
                     console.log('error', response);
+                });
+            },
+            sortDrivers(property) {
+                this.drivers.sort((a, b) => {
+                    let first = (property !== 'points') ? a.Driver[property] : parseInt(a[property], 10);
+                    let second = (property !== 'points') ? b.Driver[property] : parseInt(b[property], 10);
+                    if (first < second)
+                        return -1;
+                    if (first > second)
+                        return 1;
+                    return 0;
                 });
             }
         },
