@@ -1,6 +1,6 @@
 <template>
     <div class="drivers">
-        <h3>{{ message }}</h3>
+        <h1>{{ message }}</h1>
         <div class="row">
             <div class="col-xs-2 form-inline">
                 <label for="year-select">Year:</label>  
@@ -21,8 +21,13 @@
             </thead>
             <tbody>
                 <tr v-for="driver in drivers">
-                    <td><router-link :to="'/driver/' + year + '/' + driver.Driver.driverId"><a>{{driver.Driver.givenName + ' ' + driver.Driver.familyName}}</a></router-link></td>
-                    <td><span v-for="(team, index) in driver.Constructors">{{team.name}}<span v-if="index+1 < driver.Constructors.length">, </span></span></td>
+                    <td><router-link :to="'/drivers/' + year + '/' + driver.Driver.driverId"><a>{{driver.Driver.givenName + ' ' + driver.Driver.familyName}}</a></router-link></td>
+                    <td>
+                        <span v-for="(team, index) in driver.Constructors">
+                            <router-link :to="'/teams/' + year + '/' + team.constructorId"><a>{{team.name}}</a></router-link>
+                            <span v-if="index+1 < driver.Constructors.length">, </span>
+                        </span>
+                    </td>
                     <td>{{driver.Driver.nationality}}</td>
                     <td>{{driver.points}}</td>
                 </tr>
@@ -93,9 +98,6 @@
 </script>
 
 <style>
-    h3 {
-        font-family: sans-serif;
-    }
     th {
         cursor:pointer;
     }

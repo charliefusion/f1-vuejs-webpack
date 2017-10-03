@@ -3,7 +3,11 @@
     <div class="driver" v-else>
         <h1 class="driver-name">{{driver.Driver.givenName}}&nbsp;{{driver.Driver.familyName}} &mdash; {{year}} Season</h1>
         <strong>Nationality:</strong> {{driver.Driver.nationality}}   <br>
-        <strong>Teams:</strong> <span v-for="(team, index) in driver.Constructors">{{team.name}}<span v-if="index+1 < driver.Constructors.length">, </span></span><br>
+        <strong>Teams:</strong> 
+        <span v-for="(team, index) in driver.Constructors">
+            <router-link :to="'/teams/' + year + '/' + team.constructorId"><a>{{team.name}}</a></router-link>
+            <span v-if="index+1 < driver.Constructors.length">, </span>
+        </span><br>
         <strong>Birthday:</strong> {{driver.Driver.dateOfBirth}}<br>
         <a :href="driver.Driver.url" target="_blank" class="btn btn-default">Wikipedia Bio</a>
 
