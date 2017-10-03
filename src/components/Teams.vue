@@ -1,5 +1,5 @@
 <template>
-    <div class="main">
+    <div class="teams">
         <div class="message">Current value is: {{ count }}</div> 
         <a href="#" v-on:click.prevent="increment" class="btn btn-default">Increment</a>
         <div v-if="seen">
@@ -13,7 +13,7 @@
 
 <script>
     export default {
-        name: 'main',
+        name: 'teams',
         data: () => ({
             count: 0,
             seen: true

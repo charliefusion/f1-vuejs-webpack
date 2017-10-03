@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Main from '../components/Main';
+import Teams from '../components/Teams';
 import Drivers from '../components/Drivers';
 import Driver from '../components/Driver';
 
@@ -10,8 +10,8 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'Main',
-            component: Main
+            name: 'Teams',
+            component: Teams
         },
         {
             path: '/drivers',

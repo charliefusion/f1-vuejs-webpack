@@ -96,6 +96,9 @@
     h3 {
         font-family: sans-serif;
     }
+    th {
+        cursor:pointer;
+    }
     th.active {
         color:#428bca;
     }
