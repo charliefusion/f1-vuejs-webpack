@@ -21,7 +21,7 @@
             </thead>
             <tbody>
                 <tr v-for="driver in drivers">
-                    <td>{{driver.Driver.givenName + ' ' + driver.Driver.familyName}}</td>
+                    <td><router-link :to="'/driver/' + year + '/' + driver.Driver.driverId"><a>{{driver.Driver.givenName + ' ' + driver.Driver.familyName}}</a></router-link></td>
                     <td><span v-for="(team, index) in driver.Constructors">{{team.name}}<span v-if="index+1 < driver.Constructors.length">, </span></span></td>
                     <td>{{driver.Driver.nationality}}</td>
                     <td>{{driver.points}}</td>

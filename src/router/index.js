@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Main from '../components/Main';
 import Drivers from '../components/Drivers';
+import Driver from '../components/Driver';
 
 Vue.use(Router);
 
@@ -16,6 +17,12 @@ export default new Router({
             path: '/drivers',
             name: 'Drivers',
             component: Drivers
+        },
+        {
+            path: '/driver/:year/:id',
+            name: 'Driver',
+            component: Driver,
+            props: true
         }
     ]
 });
