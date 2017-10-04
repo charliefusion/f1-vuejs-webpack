@@ -10,7 +10,12 @@
         props: ['id', 'year'],
         data: () => ({
             loading: false
-        })
+        }),
+        watch: {
+            year: function(value) {
+                // this.getData();
+            }
+        }
     }
 </script>
 

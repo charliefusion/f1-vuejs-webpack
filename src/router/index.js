@@ -15,7 +15,7 @@ export default new Router({
             component: Teams
         },
         {
-            path: '/teams/:year/:id',
+            path: '/teams/:id',
             name: 'Team',
             component: Team,
             props: true
@@ -26,7 +26,7 @@ export default new Router({
             component: Drivers
         },
         {
-            path: '/drivers/:year/:id',
+            path: '/drivers/:id',
             name: 'Driver',
             component: Driver,
             props: true

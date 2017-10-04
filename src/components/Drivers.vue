@@ -1,16 +1,6 @@
 <template>
     <div class="drivers">
-        <h1>{{ message }}</h1>
-        <div class="row">
-            <div class="col-xs-2 form-inline">
-                <label for="year-select">Year:</label>  
-                <select id="year-select" class="form-control" v-model="year" v-on:change="getData">
-                    <option value="2017">2017</option>
-                    <option value="2016">2016</option>
-                    <option value="2015">2015</option>
-                </select>
-            </div>
-        </div>
+        <h1>{{message}} &mdash; {{year}}</h1>
         <div v-if="loading">Loading...</div>
         <table class="table table-striped" v-else>
             <thead>
@@ -21,7 +11,7 @@
             </thead>
             <tbody>
                 <tr v-for="driver in drivers">
-                    <td><router-link :to="'/drivers/' + year + '/' + driver.Driver.driverId"><a>{{driver.Driver.givenName + ' ' + driver.Driver.familyName}}</a></router-link></td>
+                    <td><router-link :to="'/drivers/' + driver.Driver.driverId"><a>{{driver.Driver.givenName + ' ' + driver.Driver.familyName}}</a></router-link></td>
                     <td>
                         <span v-for="(team, index) in driver.Constructors">
                             <router-link :to="'/teams/' + year + '/' + team.constructorId"><a>{{team.name}}</a></router-link>
@@ -39,10 +29,10 @@
 <script>
     export default {
         name: 'drivers',
+        props: ['year'],
         data: () => ({
             message: 'Drivers',
             drivers: [],
-            year: '2017',
             loading: true,
             sort: 'points',
             reversed: false
@@ -92,7 +82,14 @@
             }
         },
         created() {
-            this.getData();
+            if (this.year !== '') {
+                this.getData();
+            }
+        },
+        watch: {
+            year: function(value) {
+                this.getData();
+            }
         }
     }
 </script>

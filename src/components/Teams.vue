@@ -1,6 +1,6 @@
 <template>
     <div class="teams">
-        <h1>{{ message }}</h1>
+        <h1>{{message}} &mdash; {{year}}</h1>
         <div v-if="loading">Loading...</div>
         <table class="table table-striped" v-else>
             <thead>
@@ -12,7 +12,7 @@
             </thead>
             <tbody>
                 <tr v-for="team in teams">
-                    <td><router-link :to="'/teams/2017/' + team.Constructor.constructorId"><a>{{team.Constructor.name}}</a></router-link></td>
+                    <td><router-link :to="'/teams/' + team.Constructor.constructorId"><a>{{team.Constructor.name}}</a></router-link></td>
                     <td>{{team.Constructor.nationality}}</td>
                     <td>{{team.points}}</td>
                 </tr>
@@ -24,6 +24,7 @@
 <script>
     export default {
         name: 'teams',
+        props: ['year'],
         data: () => ({
             message: 'Teams',
             teams: [],
@@ -32,7 +33,7 @@
         methods: {
             getData() {
                 this.loading = true;
-                this.$http.get('http://ergast.com/api/f1/2014/constructorStandings.json').then(response => {
+                this.$http.get('http://ergast.com/api/f1/' + this.year + '/constructorStandings.json').then(response => {
                     console.log('response', response);
                     this.loading = false;
                     this.teams = response.body.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
@@ -42,7 +43,14 @@
             }
         },
         created() {
-            this.getData();
+            if (this.year !== '') {
+                this.getData();
+            }
+        },
+        watch: {
+            year: function(value) {
+                this.getData();
+            }
         }
     }
 </script>

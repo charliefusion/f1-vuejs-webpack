@@ -74,6 +74,11 @@
         },
         created() {
             this.getData();
+        },
+        watch: {
+            year: function(value) {
+                this.getData();
+            }
         }
     }
 </script>

@@ -1,4 +1,6 @@
+require('jquery/dist/jquery.min.js');
 require('bootstrap/dist/css/bootstrap.min.css');
+require('bootstrap/dist/js/bootstrap.min.js');
 
 import Vue from 'vue';
 import VueResource from 'vue-resource';
