@@ -11,11 +11,9 @@
 <script>
     export default {
         name: 'years',
-        data: function() {
-            return {
-                year: '2017'
-            }
-        },
+        data: () => ({
+            year: '2017'
+        }),
         methods: {
             updateYear: function(year) {
                 this.$emit('update', year);
@@ -24,5 +22,5 @@
         created() {
             this.updateYear(this.year);
         }
-    }
+    };
 </script>

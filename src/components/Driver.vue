@@ -5,7 +5,7 @@
         <strong>Nationality:</strong> {{driver.Driver.nationality}}   <br>
         <strong>Teams:</strong> 
         <span v-for="(team, index) in driver.Constructors">
-            <router-link :to="'/teams/' + year + '/' + team.constructorId"><a>{{team.name}}</a></router-link>
+            <router-link :to="'/teams/' + team.constructorId"><a>{{team.name}}</a></router-link>
             <span v-if="index+1 < driver.Constructors.length">, </span>
         </span><br>
         <strong>Birthday:</strong> {{driver.Driver.dateOfBirth}}<br>
@@ -57,14 +57,12 @@
                 this.loading = true;
                 this.loadingRaces = true;
                 this.$http.get('http://ergast.com/api/f1/' + this.year + '/drivers/' + this.id + '/driverStandings.json').then(response => {
-                    console.log('driver response', response);
                     this.loading = false;
                     this.driver = response.body.MRData.StandingsTable.StandingsLists[0].DriverStandings[0];
                 }, response => {
                     console.log('driver api error', response);
                 });
                 this.$http.get('http://ergast.com/api/f1/' + this.year + '/drivers/' + this.id + '/results.json').then(response => {
-                    console.log('races response', response);
                     this.loadingRaces = false;
                     this.races = response.body.MRData.RaceTable.Races;
                 }, response => {
@@ -73,14 +71,16 @@
             }
         },
         created() {
-            this.getData();
+            if (this.year !== '') {
+                this.getData();
+            }
         },
         watch: {
             year: function(value) {
                 this.getData();
             }
         }
-    }
+    };
 </script>
 
 <style>

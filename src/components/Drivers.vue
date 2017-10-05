@@ -41,7 +41,6 @@
             getData() {
                 this.loading = true;
                 this.$http.get('http://ergast.com/api/f1/' + this.year + '/driverStandings.json').then(response => {
-                    console.log(response);
                     this.drivers = response.body.MRData.StandingsTable.StandingsLists[0].DriverStandings;
                     this.loading = false;
                     this.sort = 'points';
@@ -91,7 +90,7 @@
                 this.getData();
             }
         }
-    }
+    };
 </script>
 
 <style>

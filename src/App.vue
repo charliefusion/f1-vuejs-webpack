@@ -34,17 +34,15 @@
     Vue.component(Years.name, Years);
     export default {
         name: 'app',
-        data: function() {
-            return {
-                year: ''
-            }
-        },
+        data: () => ({
+            year: ''
+        }),
         methods: {
             updateYear: function(year) {
                 this.year = year;
             }
         }
-    }
+    };
 </script>
 
 <style>

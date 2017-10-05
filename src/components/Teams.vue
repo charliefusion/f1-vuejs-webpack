@@ -34,7 +34,6 @@
             getData() {
                 this.loading = true;
                 this.$http.get('http://ergast.com/api/f1/' + this.year + '/constructorStandings.json').then(response => {
-                    console.log('response', response);
                     this.loading = false;
                     this.teams = response.body.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
                 }, response => {
@@ -52,7 +51,7 @@
                 this.getData();
             }
         }
-    }
+    };
 </script>
 
 <style>
