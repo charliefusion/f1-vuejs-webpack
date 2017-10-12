@@ -10,6 +10,37 @@
             <li>Points: {{team.points}}</li>
             <li>WCC Position: {{team.position}}</li>
         </ul>
+
+        <div v-if="loadingRaces">Loading race data...</div>
+        <div v-else>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Race</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Driver</th>
+                        <th>Qualified</th>
+                        <th>Finished</th>
+                    </tr>
+                </thead>
+                <tbody v-for="race in races">
+                    <tr>
+                        <td rowspan="2" class="tall-col">{{race.raceName}}</td>
+                        <td rowspan="2" class="tall-col">{{race.Circuit.Location.locality + ', ' + race.Circuit.Location.country}}</td>
+                        <td rowspan="2" class="tall-col">{{race.date}}</td>
+                        <td class="active"><router-link :to="'/drivers/' + race.Results[0].Driver.driverId"><a>{{race.Results[0].Driver.givenName + ' ' + race.Results[0].Driver.familyName}}</a></router-link></td>
+                        <td class="active">{{race.Results[0].grid}}</td>
+                        <td class="active" :class="{ 'success': race.Results[0].position === '1' }">{{race.Results[0].position}}</td>
+                    </tr>
+                    <tr class="active">
+                        <td><router-link :to="'/drivers/' + race.Results[1].Driver.driverId"><a>{{race.Results[1].Driver.givenName + ' ' + race.Results[1].Driver.familyName}}</a></router-link></td>
+                        <td>{{race.Results[1].grid}}</td>
+                        <td :class="{ 'success': race.Results[1].position === '1' }">{{race.Results[1].position}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 <script>
@@ -18,16 +49,25 @@
         props: ['id', 'year'],
         data: () => ({
             loading: true,
-            team: {}
+            loadingRaces: true,
+            team: {},
+            races: []
         }),
         methods: {
             getData() {
                 this.loading = true;
+                this.loadingRaces = true;
                 this.$http.get('http://ergast.com/api/f1/' + this.year + '/constructors/' + this.id + '/constructorStandings.json').then(response => {
                     this.loading = false;
                     this.team = response.body.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0];
                 }, response => {
                     console.log('team details error', response);
+                });
+                this.$http.get('http://ergast.com/api/f1/' + this.year + '/constructors/' + this.id + '/results.json').then(response => {
+                    this.loadingRaces = false;
+                    this.races = response.body.MRData.RaceTable.Races;
+                }, response => {
+                    console.log('team drivers error', response);
                 });
             }
         },
@@ -45,4 +85,7 @@
 </script>
 
 <style>
+    .table>tbody>tr>td.tall-col {
+        vertical-align: middle;
+    }
 </style>

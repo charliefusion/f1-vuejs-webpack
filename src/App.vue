@@ -16,7 +16,7 @@
                         <router-link tag="li" to="/teams" exact-active-class="active" active-class="active"><a>Teams</a></router-link>
                         <router-link tag="li" to="/drivers" exact-active-class="active" active-class="active"><a>Drivers</a></router-link>
                         <li class="navbar-form">
-                            <years v-on:update="updateYear"></years>
+                            <years @update="updateYear"></years>
                         </li>
                     </ul>
                 </div>
