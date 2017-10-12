@@ -4,6 +4,7 @@ import Teams from '../components/Teams';
 import Team from '../components/Team';
 import Drivers from '../components/Drivers';
 import Driver from '../components/Driver';
+import Circuits from '../components/Circuits';
 
 Vue.use(Router);
 
@@ -30,6 +31,11 @@ export default new Router({
             name: 'Driver',
             component: Driver,
             props: true
+        },
+        {
+            path: '/circuits',
+            name: 'Circuits',
+            component: Circuits
         },
         {   path: '*',
             redirect: '/teams' 
