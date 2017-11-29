@@ -2,24 +2,36 @@
     <div class="years form-inline">
         <label for="year-select">Year:</label>  
         <select id="year-select" class="form-control" v-model="year" @change="updateYear($event.target.value)">
-            <option value="2017">2017</option>
-            <option value="2016">2016</option>
-            <option value="2015">2015</option>
+            <option v-for="yearValue in years" :value="yearValue">{{yearValue}}</option>
         </select>
     </div>
 </template>
 <script>
     export default {
         name: 'years',
-        data: () => ({
-            year: '2017'
-        }),
+        data() {
+            return {
+                year: 2017
+            }
+        },
+        computed: {
+            years() {
+                var currYear = new Date().getFullYear();
+                var yearsArray = [];
+                for (var i=0; i < 10; i++) {
+                  yearsArray.push(currYear);
+                  currYear--;
+                }
+                return yearsArray;
+            }
+        },
         methods: {
             updateYear: function(year) {
                 this.$emit('update', year);
             }
         },
-        created() {
+        mounted() {
+            this.year = new Date().getFullYear();
             this.updateYear(this.year);
         }
     };
