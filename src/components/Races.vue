@@ -15,7 +15,6 @@
             </thead>
             <tbody>
                 <tr v-for="race in races">
-                    <td>{{race.round}}</td>
                     <td>{{race.date}}</td>
                     <td>{{race.raceName}}</td>
                     <td>{{race.Circuit.circuitName}}</td>
