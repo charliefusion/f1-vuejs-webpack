@@ -1,6 +1,6 @@
 <template>
     <div class="drivers">
-        <h1>{{message}} &mdash; {{year}} Season</h1>
+        <h1>Drivers &mdash; {{year}} Season</h1>
         <div v-if="loading">Loading...</div>
         <table class="table table-striped" v-else>
             <thead>
@@ -31,7 +31,6 @@
         name: 'drivers',
         props: ['year'],
         data: () => ({
-            message: 'Drivers',
             drivers: [],
             loading: true,
             sort: 'points',
@@ -80,7 +79,7 @@
                 }
             }
         },
-        created() {
+        mounted() {
             if (this.year !== '') {
                 this.getData();
             }

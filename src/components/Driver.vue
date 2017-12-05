@@ -70,7 +70,7 @@
                 });
             }
         },
-        created() {
+        mounted() {
             if (this.year !== '') {
                 this.getData();
             }

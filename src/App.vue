@@ -15,7 +15,7 @@
                     <ul class="nav navbar-nav">
                         <router-link tag="li" to="/teams" exact-active-class="active" active-class="active"><a>Teams</a></router-link>
                         <router-link tag="li" to="/drivers" exact-active-class="active" active-class="active"><a>Drivers</a></router-link>
-                        <router-link tag="li" to="/circuits" exact-active-class="active" active-class="active"><a>Circuits</a></router-link>
+                        <router-link tag="li" to="/races" exact-active-class="active" active-class="active"><a>Races</a></router-link>
                         <li class="navbar-form">
                             <years @update="updateYear"></years>
                         </li>
