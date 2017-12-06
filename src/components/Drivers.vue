@@ -64,8 +64,8 @@
                             first = a.Constructors[0].name;
                             second = b.Constructors[0].name;
                         } else {
-                            first = a.Driver[property];
-                            second = b.Driver[property];
+                            first = a.Driver[property].toLowerCase();
+                            second = b.Driver[property].toLowerCase();
                         }
                         if (first < second)
                             return -1;

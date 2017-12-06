@@ -15,8 +15,8 @@
             </thead>
             <tbody>
                 <tr v-for="race in races">
+                    <td><router-link :to="'/races/' + race.round"><a>{{race.raceName}}</a></router-link></td>
                     <td>{{race.date}}</td>
-                    <td>{{race.raceName}}</td>
                     <td>{{race.Circuit.circuitName}}</td>
                     <td>{{race.Circuit.Location.locality}}, {{race.Circuit.Location.country}}</td>
                     <td><router-link :to="'/drivers/' + race.Results[0].Driver.driverId"><a>{{race.Results[0].Driver.givenName}} {{race.Results[0].Driver.familyName}}</a></router-link></td>
