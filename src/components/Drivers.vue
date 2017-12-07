@@ -8,6 +8,7 @@
                 <th v-on:click="sortDrivers('Constructors')" :class="{'active': sort === 'Constructors'}">Teams <span class="caret" :class="{ 'reversed': reversed }" v-if="sort === 'Constructors'"></span></th>
                 <th v-on:click="sortDrivers('nationality')" :class="{'active': sort === 'nationality'}">Nationality <span class="caret" :class="{ 'reversed': reversed }" v-if="sort === 'nationality'"></span></th>
                 <th v-on:click="sortDrivers('points')" :class="{'active': sort === 'points'}">Points <span class="caret" :class="{ 'reversed': reversed }" v-if="sort === 'points'"></span></th>
+                <th v-on:click="sortDrivers('wins')" :class="{'active': sort === 'wins'}">Wins <span class="caret" :class="{ 'reversed': reversed }" v-if="sort === 'wins'"></span></th>
             </thead>
             <tbody>
                 <tr v-for="driver in drivers">
@@ -20,6 +21,7 @@
                     </td>
                     <td>{{driver.Driver.nationality}}</td>
                     <td>{{driver.points}}</td>
+                    <td>{{driver.wins}}</td>
                 </tr>
             </tbody>
         </table>
@@ -57,7 +59,7 @@
                     this.sort = property;
                     this.reversed = false;
                     this.drivers.sort((a, b) => {
-                        if (property === 'points') {
+                        if (property === 'points' || property === 'wins') {
                             first = parseInt(a[property], 10);
                             second = parseInt(b[property], 10);
                         } else if (property === 'Constructors') {
@@ -73,7 +75,7 @@
                             return 1;
                         return 0;
                     });
-                    if (property === 'points') {
+                    if (property === 'points' || property === 'wins') {
                         this.drivers.reverse();
                     }
                 }

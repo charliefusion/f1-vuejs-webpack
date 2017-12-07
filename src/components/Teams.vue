@@ -8,6 +8,7 @@
                     <th>Name</th>
                     <th>Nationality</th>
                     <th>Points</th>
+                    <th>Wins</th>
                 </tr>
             </thead>
             <tbody>
@@ -15,6 +16,7 @@
                     <td><router-link :to="'/teams/' + team.Constructor.constructorId"><a>{{team.Constructor.name}}</a></router-link></td>
                     <td>{{team.Constructor.nationality}}</td>
                     <td>{{team.points}}</td>
+                    <td>{{team.wins}}</td>
                 </tr>
             </tbody>
         </table>

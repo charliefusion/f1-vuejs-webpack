@@ -2,8 +2,8 @@
     <div v-if="loading">Loading...</div>
     <div class="team" v-else>
         <h1>{{ team.Constructor.name }} &mdash; {{ year }} Season</h1>
-        <strong>Nationality:</strong> {{team.Constructor.nationality}}   <br>
-        <a :href="team.Constructor.url" target="_blank" class="btn btn-default">Wikipedia Bio</a>
+        <p><strong>Nationality:</strong> {{team.Constructor.nationality}}</p>
+        <p><a :href="team.Constructor.url" target="_blank" class="btn btn-default">Wikipedia Bio</a></p>
 
         <ul>
             <li>{{year}} Wins: {{team.wins}}</li>
@@ -11,6 +11,7 @@
             <li>WCC Position: {{team.position}}</li>
         </ul>
 
+        <h2>Results</h2>
         <div v-if="loadingRaces">Loading race data...</div>
         <div v-else>
             <table class="table">
@@ -26,7 +27,7 @@
                 </thead>
                 <tbody v-for="race in races">
                     <tr>
-                        <td rowspan="2" class="tall-col">{{race.raceName}}</td>
+                        <td rowspan="2" class="tall-col"><router-link :to="'/races/' + race.round"><a>{{race.raceName}}</a></router-link></td>
                         <td rowspan="2" class="tall-col">{{race.Circuit.Location.locality + ', ' + race.Circuit.Location.country}}</td>
                         <td rowspan="2" class="tall-col">{{race.date}}</td>
                         <td class="active"><router-link :to="'/drivers/' + race.Results[0].Driver.driverId"><a>{{race.Results[0].Driver.givenName + ' ' + race.Results[0].Driver.familyName}}</a></router-link></td>

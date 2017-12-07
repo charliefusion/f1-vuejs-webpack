@@ -31,7 +31,7 @@
         name: 'races',
         props: ['year'],
         data: () => ({
-            loading: false,
+            loading: true,
             races: []
         }),
         methods: {

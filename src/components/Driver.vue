@@ -2,21 +2,23 @@
     <div v-if="loading">Loading...</div>
     <div class="driver" v-else>
         <h1 class="driver-name">{{driver.Driver.givenName}}&nbsp;{{driver.Driver.familyName}} &mdash; {{year}} Season</h1>
-        <strong>Nationality:</strong> {{driver.Driver.nationality}}   <br>
-        <strong>Teams:</strong> 
-        <span v-for="(team, index) in driver.Constructors">
-            <router-link :to="'/teams/' + team.constructorId"><a>{{team.name}}</a></router-link>
-            <span v-if="index+1 < driver.Constructors.length">, </span>
-        </span><br>
-        <strong>Birthday:</strong> {{driver.Driver.dateOfBirth}}<br>
-        <a :href="driver.Driver.url" target="_blank" class="btn btn-default">Wikipedia Bio</a>
+        <p>
+            <strong>Nationality:</strong> {{driver.Driver.nationality}} <br>
+            <strong>Teams:</strong> 
+                <span v-for="(team, index) in driver.Constructors">
+                    <router-link :to="'/teams/' + team.constructorId"><a>{{team.name}}</a></router-link><span v-if="index+1 < driver.Constructors.length">, </span>
+                </span> <br>
+            <strong>Birthday:</strong> {{driver.Driver.dateOfBirth}} <br>
+        </p>
+        <p><a :href="driver.Driver.url" target="_blank" class="btn btn-default">Wikipedia Bio</a></p>
 
         <ul>
-            <li>{{year}} Wins: {{driver.wins}}</li>
-            <li>Points: {{driver.points}}</li>
-            <li>WDC Position: {{driver.position}}</li>
+            <li><strong>{{year}} Wins:</strong> {{driver.wins}}</li>
+            <li><strong>Points:</strong> {{driver.points}}</li>
+            <li><strong>WDC Position:</strong> {{driver.position}}</li>
         </ul>
 
+        <h2>Results</h2>
         <div v-if="loadingRaces">Loading race data...</div>
         <div v-else>
             <table class="table">
@@ -32,8 +34,8 @@
                 <tbody>
                     <tr v-for="race in races" :class="{ 'success': race.Results[0].position === '1' }">
                         <td>{{race.round}}</td>
-                        <td>{{race.raceName}}</td>
-                        <td>{{race.Results[0].Constructor.name}}</td>
+                        <td><router-link :to="'/races/' + race.round"><a>{{race.raceName}}</a></router-link></td>
+                        <td><router-link :to="'/teams/' + race.Results[0].Constructor.constructorId"><a>{{race.Results[0].Constructor.name}}</a></router-link></td>
                         <td>{{race.Results[0].grid}}</td>
                         <td>{{race.Results[0].position}}</td>
                     </tr>
