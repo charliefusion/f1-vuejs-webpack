@@ -4,19 +4,20 @@
         <div v-if="loading">Loading...</div>
         <table class="table table-striped" v-else>
             <thead>
-                <th v-on:click="sortDrivers('familyName')" :class="{'active': sort === 'familyName'}">Name <span class="caret" :class="{ 'reversed': reversed }" v-if="sort === 'familyName'"></span></th>
-                <th v-on:click="sortDrivers('Constructors')" :class="{'active': sort === 'Constructors'}">Teams <span class="caret" :class="{ 'reversed': reversed }" v-if="sort === 'Constructors'"></span></th>
-                <th v-on:click="sortDrivers('nationality')" :class="{'active': sort === 'nationality'}">Nationality <span class="caret" :class="{ 'reversed': reversed }" v-if="sort === 'nationality'"></span></th>
-                <th v-on:click="sortDrivers('points')" :class="{'active': sort === 'points'}">Points <span class="caret" :class="{ 'reversed': reversed }" v-if="sort === 'points'"></span></th>
-                <th v-on:click="sortDrivers('wins')" :class="{'active': sort === 'wins'}">Wins <span class="caret" :class="{ 'reversed': reversed }" v-if="sort === 'wins'"></span></th>
+                <tr>
+                    <th v-on:click="sortDrivers('familyName')" :class="{'active': sort === 'familyName'}">Name <span class="caret" :class="{ 'reversed': reversed }" v-if="sort === 'familyName'"></span></th>
+                    <th v-on:click="sortDrivers('Constructors')" :class="{'active': sort === 'Constructors'}">Teams <span class="caret" :class="{ 'reversed': reversed }" v-if="sort === 'Constructors'"></span></th>
+                    <th v-on:click="sortDrivers('nationality')" :class="{'active': sort === 'nationality'}">Nationality <span class="caret" :class="{ 'reversed': reversed }" v-if="sort === 'nationality'"></span></th>
+                    <th v-on:click="sortDrivers('points')" :class="{'active': sort === 'points'}">Points <span class="caret" :class="{ 'reversed': reversed }" v-if="sort === 'points'"></span></th>
+                    <th v-on:click="sortDrivers('wins')" :class="{'active': sort === 'wins'}">Wins <span class="caret" :class="{ 'reversed': reversed }" v-if="sort === 'wins'"></span></th>
+                </tr>
             </thead>
             <tbody>
                 <tr v-for="driver in drivers">
                     <td><router-link :to="'/drivers/' + driver.Driver.driverId"><a>{{driver.Driver.givenName + ' ' + driver.Driver.familyName}}</a></router-link></td>
                     <td>
                         <span v-for="(team, index) in driver.Constructors">
-                            <router-link :to="'/teams/' + year + '/' + team.constructorId"><a>{{team.name}}</a></router-link>
-                            <span v-if="index+1 < driver.Constructors.length">, </span>
+                            <router-link :to="'/teams/' + year + '/' + team.constructorId"><a>{{team.name}}</a></router-link><span v-if="index+1 < driver.Constructors.length">, </span>
                         </span>
                     </td>
                     <td>{{driver.Driver.nationality}}</td>
@@ -94,7 +95,7 @@
     };
 </script>
 
-<style>
+<style scoped>
     th {
         cursor:pointer;
     }
