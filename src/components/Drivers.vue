@@ -2,6 +2,7 @@
     <div class="drivers">
         <h1>Drivers &mdash; {{year}} Season</h1>
         <div v-if="loading">Loading...</div>
+        <div v-else-if="error">An error has occurred. No driver data is available.</div>
         <table class="table table-striped" v-else>
             <thead>
                 <tr>
@@ -37,17 +38,25 @@
             drivers: [],
             loading: true,
             sort: 'points',
-            reversed: false
+            reversed: false,
+            error: false
         }),
         methods: {
             getData() {
                 this.loading = true;
+                this.error = false;
                 this.$http.get('http://ergast.com/api/f1/' + this.year + '/driverStandings.json').then(response => {
-                    this.drivers = response.body.MRData.StandingsTable.StandingsLists[0].DriverStandings;
                     this.loading = false;
-                    this.sort = 'points';
-                    this.reversed = false;
+                    if (response.body.MRData.StandingsTable.StandingsLists.length > 0) {
+                        this.drivers = response.body.MRData.StandingsTable.StandingsLists[0].DriverStandings;
+                        this.sort = 'points';
+                        this.reversed = false;
+                    } else {
+                        this.error = true;
+                    }
                 }, response => {
+                    this.loading = false;
+                    this.error = true;
                     console.log('error', response);
                 });
             },

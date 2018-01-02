@@ -2,6 +2,7 @@
     <div class="races">
         <h1>Races &mdash; {{year}} Season</h1>
         <div v-if="loading">Loading...</div>
+        <div v-else-if="error">An error has occurred. No race data is available.</div>
         <table class="table table-striped" v-else>
             <thead>
                 <tr>
@@ -32,15 +33,23 @@
         props: ['year'],
         data: () => ({
             loading: true,
-            races: []
+            races: [],
+            error: false
         }),
         methods: {
             getRaces() {
                 this.loading = true;
+                this.error = false;
                 this.$http.get('http://ergast.com/api/f1/' + this.year + '/results/1.json').then(response => {
                     this.loading = false;
-                    this.races = response.body.MRData.RaceTable.Races;
+                    if (response.body.MRData.RaceTable.Races.length > 0) {
+                        this.races = response.body.MRData.RaceTable.Races;
+                    } else {
+                        this.error = true;
+                    }
                 }, response => {
+                    this.loading = false;
+                    this.error = true;
                     console.log('error', response);
                 });
             }

@@ -11,12 +11,15 @@
         name: 'years',
         data() {
             return {
-                year: 2017
+                year: 0
             }
         },
         computed: {
+            lastYear() {
+                return new Date().getFullYear() - 1
+            },
             years() {
-                var currYear = new Date().getFullYear();
+                var currYear = this.lastYear;
                 var yearsArray = [];
                 for (var i=0; i < 10; i++) {
                   yearsArray.push(currYear);
@@ -31,7 +34,7 @@
             }
         },
         mounted() {
-            this.year = new Date().getFullYear();
+            this.year = this.lastYear;
             this.updateYear(this.year);
         }
     };
