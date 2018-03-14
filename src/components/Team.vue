@@ -68,7 +68,7 @@
                 this.loadingRaces = true;
                 this.error = false;
                 this.errorRaces = false;
-                this.$http.get('http://ergast.com/api/f1/' + this.year + '/constructors/' + this.id + '/constructorStandings.json').then(response => {
+                this.$http.get('//ergast.com/api/f1/' + this.year + '/constructors/' + this.id + '/constructorStandings.json').then(response => {
                     this.loading = false;
                     if (response.body.MRData.StandingsTable.StandingsLists.length > 0) {
                         this.team = response.body.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0];
@@ -80,7 +80,7 @@
                     this.error = true;
                     console.log('team details error', response);
                 });
-                this.$http.get('http://ergast.com/api/f1/' + this.year + '/constructors/' + this.id + '/results.json').then(response => {
+                this.$http.get('//ergast.com/api/f1/' + this.year + '/constructors/' + this.id + '/results.json').then(response => {
                     this.loadingRaces = false;
                     if (response.body.MRData.RaceTable.Races.length > 0) {
                         this.races = response.body.MRData.RaceTable.Races;

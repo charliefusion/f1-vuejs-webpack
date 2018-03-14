@@ -49,7 +49,7 @@
             getRaceInfo() {
                 this.loading = true;
                 this.error = false;
-                this.$http.get('http://ergast.com/api/f1/' + this.year + '/' + this.id + '/results.json').then(response => {
+                this.$http.get('//ergast.com/api/f1/' + this.year + '/' + this.id + '/results.json').then(response => {
                     this.loading = false;
                     if (response.body.MRData.RaceTable.Races.length > 0) {
                         this.race = response.body.MRData.RaceTable.Races[0];

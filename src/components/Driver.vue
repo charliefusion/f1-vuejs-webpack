@@ -68,7 +68,7 @@
                 this.loadingRaces = true;
                 this.error = false;
                 this.errorRaces = false;
-                this.$http.get('http://ergast.com/api/f1/' + this.year + '/drivers/' + this.id + '/driverStandings.json').then(response => {
+                this.$http.get('//ergast.com/api/f1/' + this.year + '/drivers/' + this.id + '/driverStandings.json').then(response => {
                     this.loading = false;
                     if (response.body.MRData.StandingsTable.StandingsLists.length > 0) {
                         this.driver = response.body.MRData.StandingsTable.StandingsLists[0].DriverStandings[0];
@@ -80,7 +80,7 @@
                     this.error = true;
                     console.log('driver api error', response);
                 });
-                this.$http.get('http://ergast.com/api/f1/' + this.year + '/drivers/' + this.id + '/results.json').then(response => {
+                this.$http.get('//ergast.com/api/f1/' + this.year + '/drivers/' + this.id + '/results.json').then(response => {
                     this.loadingRaces = false;
                     if (response.body.MRData.RaceTable.Races.length > 0) {
                         this.races = response.body.MRData.RaceTable.Races;

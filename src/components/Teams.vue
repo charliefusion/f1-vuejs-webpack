@@ -37,7 +37,7 @@
             getData() {
                 this.loading = true;
                 this.error = false;
-                this.$http.get('http://ergast.com/api/f1/' + this.year + '/constructorStandings.json').then(response => {
+                this.$http.get('//ergast.com/api/f1/' + this.year + '/constructorStandings.json').then(response => {
                     this.loading = false;
                     if (response.body.MRData.StandingsTable.StandingsLists.length > 0) {
                         this.teams = response.body.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
