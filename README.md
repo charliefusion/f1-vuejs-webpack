@@ -1,6 +1,6 @@
 # F1 Data App with Vue.js & Webpack
 
-Built by [Charlie Thomason](http://charliethomason.com/code/)
+Built by Charlie Thomason
 
 Resources:
 * [Vue.js v.2](https://vuejs.org/v2/guide/)
